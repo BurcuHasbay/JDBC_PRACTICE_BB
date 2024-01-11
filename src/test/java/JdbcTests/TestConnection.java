@@ -18,13 +18,29 @@ public class TestConnection {
         Statement statement = connection.createStatement();
 
         //Save the data in resultSet
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM employees");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM regions");
 
         //next() >>>>move pointer to first row
         resultSet.next();
 
         //Getting info with column
         System.out.println(resultSet.getString("region_Name"));
+
+        //getting info with column index (starts from 1)
+        resultSet.getInt(1);
+        //The result will be Europe, 'cause in the first row of the first column is Europe
+
+        //-1 Europe
+        //-2 America
+        System.out.println(resultSet.getInt(1)+ "-"+resultSet.getString(2));
+
+        //move to second row
+        resultSet.next();
+        System.out.println(resultSet.getInt(1)+ "-"+resultSet.getString(2));
+
+        //move to third row
+        resultSet.next();
+        System.out.println(resultSet.getInt(1)+ "-"+resultSet.getString(2));
 
 
 
