@@ -20,6 +20,17 @@ public class TestConnection {
         //Save the data in resultSet
         ResultSet resultSet = statement.executeQuery("SELECT * FROM employees");
 
+        //next() >>>>move pointer to first row
+        resultSet.next();
+
+        //Getting info with column
+        System.out.println(resultSet.getString("region_Name"));
+
+
+
+
+
+
         //close connection
         resultSet.close();
         statement.close();
