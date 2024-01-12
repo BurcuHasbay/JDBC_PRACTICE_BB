@@ -59,7 +59,16 @@ public class jDBC_examples {
         int rowCount = resultSet.getRow();
         System.out.println(rowCount);
 
+        //HOW TO PRINT THE WHOLE SECOND COLUMN INFORMATION OF THE DEPARTMENTS TABLE
+        //WHERE IS THE POINTER AFTER I MOVED IT TO THE LAST ONE?
+        //I NEED THE POINTER TO BE AT THE BEGINNING OF THE COLUMN
+        //THAT'S WHY, BEFOREFIRST() METHOD SHOULD BE USED
 
+        resultSet.beforeFirst();
+
+        while (resultSet.next()){
+            System.out.println(resultSet.getString(2));
+        }
 
 
 
