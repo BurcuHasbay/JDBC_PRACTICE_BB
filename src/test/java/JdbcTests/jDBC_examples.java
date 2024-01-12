@@ -42,8 +42,35 @@ public class jDBC_examples {
         connection.close();
 
     }
+//------------------------------------------------------------------------------------------------------------
+    //RESULTSET METHODS PRACTICE
+    @Test
+    public void test2() throws SQLException {
+        Connection connection = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM departments");
+
+        // HOW TO FIND HOW MANY ROWS WE HAVE IN THE DEPARTMENTS QUERY????
+        //COMBINATION OF THE TWO ROWS
+
+        //MOVE TO THE LAST ROW FIRS,
+        resultSet.last();
+        //THEN,GET THE ROW NUMBER
+        int rowCount = resultSet.getRow();
+        System.out.println(rowCount);
 
 
+
+
+
+
+
+        resultSet.close();
+        statement.close();
+        connection.close();
+
+
+    }
 
 
 }
