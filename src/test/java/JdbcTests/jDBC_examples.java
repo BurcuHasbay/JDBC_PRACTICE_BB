@@ -87,7 +87,7 @@ public class jDBC_examples {
     public void test3() throws SQLException {
         Connection connection = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM departments");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM employees");
 
 
         //GET THE DATA BASE RELATED DATA INSIDE THE DBMETADATA OBJECT
@@ -98,6 +98,25 @@ public class jDBC_examples {
         System.out.println("dBMetaData.getDriverName() = " + dBMetaData.getDriverName());
         System.out.println("dBMetaData.getDriverVersion() = " + dBMetaData.getDriverVersion());
 
+        //get the result metadata
+        ResultSetMetaData rsMetaData = resultSet.getMetaData();
+
+
+        //HOW MANY COLUMN DO WE HAVE?
+        int columnCount = rsMetaData.getColumnCount();
+        System.out.println(columnCount);
+
+        //GETTING THE COLUMN NAME
+        System.out.println(rsMetaData.getColumnName(1));
+        System.out.println(rsMetaData.getColumnName(2));
+
+        //GET ALL THE COLUMN NAMES DYNAMICALLY
+        //WE HAVE 11 COLUMNS IN THE EMPLOYEE TABLE, 
+        //TO GET ALL OF THEM, WE NEED A LOOP
+        for (int i = 1; i <= columnCount; i++) {
+            System.out.println(rsMetaData.getColumnName(i));
+
+        }
 
         resultSet.close();
         statement.close();
