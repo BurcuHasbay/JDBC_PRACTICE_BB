@@ -1,6 +1,7 @@
 package JdbcTests;
 
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
@@ -44,6 +45,7 @@ public class jDBC_examples {
     }
 //------------------------------------------------------------------------------------------------------------
     //RESULTSET METHODS PRACTICE
+    @DisplayName("ResultSet Methods")
     @Test
     public void test2() throws SQLException {
         Connection connection = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
@@ -81,5 +83,26 @@ public class jDBC_examples {
 
     }
 
+    @Test
+    public void test3() throws SQLException {
+        Connection connection = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM departments");
+
+
+        //GET THE DATA BASE RELATED DATA INSIDE THE DBMETADATA OBJECT
+        DatabaseMetaData dBMetaData = connection.getMetaData();
+        System.out.println("dBMetaData.getUserName() = " + dBMetaData.getUserName());
+        System.out.println("dBMetaData.getDatabaseProductName() = " + dBMetaData.getDatabaseProductName());
+        System.out.println("dBMetaData.getDatabaseProductVersion() = " + dBMetaData.getDatabaseProductVersion());
+        System.out.println("dBMetaData.getDriverName() = " + dBMetaData.getDriverName());
+        System.out.println("dBMetaData.getDriverVersion() = " + dBMetaData.getDriverVersion());
+
+
+        resultSet.close();
+        statement.close();
+        connection.close();
+
+    }
 
 }
